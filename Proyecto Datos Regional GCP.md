@@ -49,11 +49,11 @@ Se propone una **arquitectura federada**, que permita ingestar, catalogar y proc
 La solución propuesta se visualiza en el siguiente diagrama:
 
 
+
+#### 🗺️ Arquitectura de la Plataforma Federada de Datos – GCP
+
+### 🌍 Región A / Proyecto Regional
 ```
-# 🗺️ Arquitectura de la Plataforma Federada de Datos – GCP
-
-## 🌍 Región A / Proyecto Regional
-
 +-------------------------------------------------------------+
 |                 GCP Project: Region A (ej. us-east1)        |
 |                                                             |
@@ -69,9 +69,9 @@ La solución propuesta se visualiza en el siguiente diagrama:
               v                          v
         (Transformación)         (Eventos disparadores)
 
-
-## 🧬 Plataforma Central – Curación y Federación
-
+```
+### 🧬 Plataforma Central – Curación y Federación
+```
 +-------------------------------------------------------------+
 |                GCP Proyecto Centralizado (shared/core)      |
 |                                                             |
@@ -88,10 +88,10 @@ La solución propuesta se visualiza en el siguiente diagrama:
 |  | BI Engine + Looker Studio|
 |  +--------------------------+
 +-------------------------------------------------------------+
+```
 
-
-## 🔐 Gobernanza, Metadatos y Seguridad
-
+### Gobernanza, Metadatos y Seguridad
+```
 +-------------------------------------------------------------+
 |                  Gobernanza y Control                       |
 |  +------------+  +--------------+  +----------------------+ |
@@ -99,10 +99,10 @@ La solución propuesta se visualiza en el siguiente diagrama:
 |  | (zonas     |  | (metadatos)  |  | Auditoría / Roles    | |
 |  |  raw/etc)  |  +--------------+  +----------------------+ |
 +-------------------------------------------------------------+
+```
 
-
-## 🔁 Automatización y Orquestación
-
+## Automatización y Orquestación
+```
 +-------------------------------------------------------------+
 |                    Automatización                           |
 |  +------------+  +----------------+  +---------------------+|
