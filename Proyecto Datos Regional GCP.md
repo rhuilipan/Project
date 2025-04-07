@@ -5,7 +5,9 @@
 
 ## Índice Propuesto – Documento de Proyecto Plataforma Federada
 
-1. [Contexto Inicial](#contexto_inicial)
+1. [Introducción](#introduccion)
+
+2. [Contexto Inicial](#contexto_inicial)
     - 1.1 Fase de Diseño
     - 1.2 Sugerencia inicial: Alineación Estratégica
     - 1.3 Enfoque Estratégico y Modelo de Ejecución:
@@ -13,83 +15,63 @@
     - 1.5 Fase de Diseño: Co-creación de la Arquitectura
     - 1.6 Fase de Ejecución: Enfoque Iterativo y Visible
 
-2. [Alcance del Proyecto](#alcance-del-proyecto)
+3. [Alcance del Proyecto](#alcance-del-proyecto)
     - 2.1 Qué incluye y qué no incluye la solución
     - 2.2 Principales fuentes y sistemas involucrados
     - 2.3 Equipos y regiones afectadas
 
-3. [Estrategia de Ejecución](#estrategia-de-ejecucion)
+4. [Estrategia de Ejecución](#estrategia-de-ejecucion)
     - 3.1 Plan de reuniones iniciales y workshops de descubrimiento
     - 3.2 Metodología propuesta (Agile, milestones, etc.)
     - 3.3 Roles clave y conformación de equipos (ej. Data Council)
 
-4. [Evaluación de Alternativas Técnicas](#evaluacion-de-alternativas-tecnicas)
+5. [Evaluación de Alternativas Técnicas](#evaluacion-de-alternativas-tecnicas)
     - 4.1 Análisis de opciones de arquitectura 
     - 4.2 Criterios de decisión: rendimiento, gobernanza, costos, escalabilidad
     - 4.3 Justificación de la solución elegida
 
-5. [Arquitectura Propuesta](#arquitectura-propuesta)
+6. [Arquitectura Propuesta](#arquitectura-propuesta)
     - 5.1 Diagrama general
     - 5.2 Flujo de ingesta y procesamiento
     - 5.3 Gobernanza, seguridad y control de calidad de datos
     - 5.4 Consulta federada y mecanismos de explotación
 
-6. [Planificación de Esfuerzos](#planificacion-de-esfuerzos)
+7. [Planificación de Esfuerzos](#planificacion-de-esfuerzos)
     - 6.1 Estimación de recursos por etapa (personas/roles/skills)
     - 6.2 Propuesta de staffing interno y externo
     - 6.3 Capacitaciones necesarias y ramp-up
 
-7. [Evaluación Económica](#evaluación-economica)
+8. [Evaluación Económica](#evaluación-economica)
     - 7.1 Costos por servicio GCP estimados
     - 7.2 Costos operativos y licencias (si aplica)
     - 7.3 Escenarios de optimización y control de gasto
 
-8. [Plan de Entregables](#plan-de-entregables)
+9. [Plan de Entregables](#plan-de-entregables)
     - 8.1 Hitos principales (MVPs, pilotos, fases)
     - 8.2 Fechas estimadas de entrega por etapa
     - 8.3 Métricas de éxito y criterios de aceptación
 
-9. [Riesgos y Estrategias de Mitigación](#eiesgos-y-estrategias-de-mitigacion)
+10. [Riesgos y Estrategias de Mitigación](#eiesgos-y-estrategias-de-mitigacion)
     - 9.1 Riesgos técnicos y organizacionales
     - 9.2 Planes de contingencia y fallback
     - 9.3 Monitoreo y revisión periódica
 
-10. [Conclusión y Siguientes Pasos](#conclusion-y-siguientes-pasos)
+11. [Conclusión y Siguientes Pasos](#conclusion-y-siguientes-pasos)
     - 10.1 Impacto esperado
     - 10.2 Propuesta de seguimiento y evolución continua
     - 10.3 Formalización de acuerdos e inicio de ejecución
 
+## Introducción
 
-## Contexto Inicial
-Con operaciones en múltiples regiones, nuestras unidades de negocio generan volúmenes significativos de datos diariamente, provenientes de sistemas locales diversos y arquitecturas regionalizadas. En este escenario, **la información es un activo crítico**, y la capacidad de integrarla y transformarla en insights accionables define nuestra ventaja competitiva.
-Hoy, nuestra organización enfrenta el desafío de romper con los silos de datos que existen entre regiones. Cada una ha evolucionado con autonomía, creando infraestructuras distintas que dificultan la interoperabilidad, encarecen el análisis y limitan nuestra capacidad de actuar a escala global.
-Desde la dirección ejecutiva se ha solicitado una **plataforma federada de datos** que permita una visión única del negocio, sin comprometer la autonomía local ni incurrir en costos excesivos. Este desafío implica visión, alineación cultural y excelencia operativa.
-
-### Enfoque Estratégico y Modelo de Ejecución:
-Más allá de diseñar una solución técnica, nuestra misión será construir una plataforma que escale con el negocio, inspire confianza y acelere la toma de decisiones en todas las áreas.
-
-### Sugerencia inicial: Alineación Estratégica
-- Iniciaremos con una **serie de workshops de descubrimiento regional**, donde participarán los equipos técnicos y de negocio de cada zona. Queremos entender las particularidades de cada operación: tipos de datos, necesidades analíticas, restricciones regulatorias, etc.
-- A su vez, desarrollaremos un **mapa de madurez de datos**, identificando brechas y oportunidades por región, con el fin de construir una solución flexible y priorizada.
-
-
-### Fase de Diseño: Co-creación de la Arquitectura
-- Se conformará un **Data Platform Council**, compuesto por referentes técnicos y líderes de producto de cada región. Esto nos permitirá garantizar el buy-in desde el inicio y evitar soluciones "impuestas".
-- Las decisiones clave (gobernanza, zonificación de datos, particionamiento regional, etc.) se discutirán en este foro con foco en sostenibilidad y escalabilidad.
-
-### Fase de Ejecución: Enfoque Iterativo y Visible
-- Ejecutaremos el proyecto bajo un **modelo de entrega incremental (Agile)**, donde cada sprint entregará valor tangible: pipelines funcionales, catálogos publicados, dashboards unificados, etc.
-- Organizaremos **demos quincenales abiertas** para todo el equipo ejecutivo, asegurando visibilidad, transparencia y alineación continua.
-- Además, habilitaremos un **entorno de "sandbox" para analistas clave**, donde podrán probar la plataforma antes de su despliegue oficial.
-
+El presente documento detalla la propuesta de diseño, planificación y ejecución para una plataforma federada de datos en Google Cloud Platform, adaptada al contexto de una organización global del sector aeronáutico. En la actualidad, los datos operativos, comerciales y de experiencia del cliente se encuentran dispersos en múltiples regiones, proyectos y sistemas. Esto dificulta la generación de métricas consistentes, retrasa la toma de decisiones y limita el uso avanzado de datos (machine learning, personalización, etc.). El objetivo del proyecto es diseñar una solución técnica y organizacional que habilite la integración de datos multirregión con un enfoque moderno, gobernado y orientado al autoservicio, utilizando capacidades nativas de GCP como BigQuery, Dataflow, Dataplex, Pub/Sub, y otros.
 
 ---
 
 ## Problemática
 
-Actualmente, la organización enfrenta desafíos técnicos y operativos derivados de:
+Actualmente, la organización enfrenta las siguentes problemáticas:
 
-- **Silos de datos regionales** en múltiples proyectos GCP.
+- **Silos de datos regionales** en múltiples proyectos GCP o fuera de estos.
 - **Esquemas inconsistentes** entre fuentes.
 - Latencias elevadas en análisis multi-región.
 - Costos crecientes por replicación manual o soluciones ad-hoc.
@@ -99,15 +81,71 @@ Actualmente, la organización enfrenta desafíos técnicos y operativos derivado
 
 ## Solución Propuesta
 
+Antes de empezar con la solución técnica, es indispensable iniciar con una serie de reuniones de descubrimiento regional que permitan entender las particularidades operativas y analíticas de cada zona, complementadas con un mapa de madurez de datos que identifique brechas, oportunidades y estructuras de esquemas. La arquitectura será co-creada en conjunto con un **Data Platform Council ***, conformado por líderes técnicos regionales y representantes del proveedor cloud, asegurando alineación, sostenibilidad y adopción temprana. La ejecución se realizará mediante un modelo iterativo e incremental, entregando valor tangible en cada sprint y promoviendo visibilidad continua a través de demos quincenales y entornos de prueba ("sandbox") para usuarios clave, garantizando así una evolución orgánica y colaborativa del proyecto.
+
 Se propone una **arquitectura federada**, que permita ingestar, catalogar y procesar datos provenientes de BigQuery, Cloud Storage y CloudSQL en múltiples regiones de GCP, soportando flujos en **tiempo real y batch**, con herramientas nativas para gobernanza, eficiencia y análisis avanzado.
 
 ---
 
-### Arquitectura General
+### Diagrama 
+La solución propuesta se visualiza en el siguiente diagrama:
+                         🌍 ENTORNOS REGIONALES
+┌─────────────────────────────────────────────────────────────────────┐
+│                         GCP Project: Región A (ej. us-east1)        │
+│ ┌────────────┐  ┌──────────────┐  ┌────────────┐                    │
+│ │ CloudSQL   │  │  CloudStorage│  │  BigQuery  │ ← Fuentes de datos │
+│ └────┬───────┘  └──────┬───────┘  └────┬───────┘                    │
+│      │                 │              │                             │
+│  ┌───▼─────────┐   ┌───▼─────────┐ ┌───▼────────┐                   │
+│  │  Dataflow   │   │  Pub/Sub    │ │EXPORT DATA │                   │
+│  └────┬────────┘   └────┬────────┘ └────────────┘                   │
+└───────┴─────────────────┴───────────────────────────────────────────┘
+         │                            │
+         ▼                            ▼
+       🧪 ETL / Transformación        🧪 Eventos disparadores
+         ▼                            ▼
+
+                         🧬 CURACIÓN & FEDERACIÓN DE DATOS
+┌─────────────────────────────────────────────────────────────────────┐
+│                    GCP Proyecto Centralizado (shared/core)          │
+│ ┌────────────────────────────┐  ┌────────────────────────────┐      │
+│ │ Curated BigQuery Datasets  │  │ External Tables (CloudSQL) │      │
+│ └──────────────┬─────────────┘  └──────────────┬─────────────┘      │
+│                ▼                               ▼                    │
+│         ┌────────────┐                 ┌────────────────────┐       │
+│         │ Views /    │◄──Federated────►│ EXTERNAL_QUERY()   │       │
+│         │Materialized│                 └────────────────────┘       │
+│         │    Views   │                                              │
+│         └─────┬──────┘                                              │
+│               ▼                                                     │
+│     ┌─────────────────────────┐                                     │
+│     │ BigQuery BI Engine      │                                     │
+│     │ + Looker Studio         │◄── Dashboards / Self-Service        │
+│     └─────────────────────────┘                                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+                        📚 GOBERNANZA Y OPERACIÓN TRANSVERSAL
+┌─────────────────────────────────────────────────────────────────────┐
+│ ┌───────────────┐   ┌───────────────┐   ┌────────────────────────┐  │
+│ │   Dataplex    │   │ Data Catalog  │   │ Cloud Monitoring / IAM │  │
+│ │ (zonas raw,   │   │ (metadatos,   │   │ Auditoría, accesos)    │  │
+│ │ curated, etc) │   │  etiquetas)   │   └────────────────────────┘  │
+│ └───────────────┘   └───────────────┘                               │
+└─────────────────────────────────────────────────────────────────────┘
+
+                        🔄 AUTOMATIZACIÓN Y ORQUESTACIÓN
+┌─────────────────────────────────────────────────────────────────────┐
+│ ┌──────────────┐   ┌──────────────────┐   ┌─────────────────────┐   │
+│ │ Cloud Build  │   │ Cloud Scheduler  │   │ Terraform (IaC)     │   │
+│ └──────────────┘   └──────────────────┘   └─────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
 
 La solución incluye los siguientes componentes:
 *: cloud ran es gratis es para hacer api rest chicas: es serverless.
-*: flask  
+*: flask 
 
 - **Cloud Pub/Sub**: canal de ingestión de eventos para procesamiento en tiempo real.
 - **Cloud Functions**: disparadores ligeros para automatización basada en eventos.
