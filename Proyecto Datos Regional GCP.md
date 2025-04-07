@@ -93,14 +93,27 @@ La solución propuesta se visualiza en el siguiente diagrama:
 
 ## 🌍 Región A / Proyecto Regional
 
+```mermaid
 flowchart TD
-    A[CloudSQL] -->|ETL| B[Dataflow]
-    B --> C[BigQuery Raw]
-    C --> D[BigQuery Curated]
-    D --> E[Looker Studio]
-    C -->|Federated| F[EXTERNAL_QUERY()]
-    F --> E
+  A[CloudSQL] -->|ETL| B[Dataflow]
+  B --> C[BigQuery Raw]
+  C --> D[BigQuery Curated]
+  D --> E[Looker Studio]
+  C -->|Federated| F[EXTERNAL_QUERY()]
+  F --> E
+```
 
+flowchart TD
+  subgraph Ingesta
+    A[CloudSQL] --> B[Dataflow]
+    C[GCS] --> B
+  end
+
+  B --> D[BigQuery Raw]
+  D --> E[BigQuery Curated]
+  E --> F[Looker Studio]
+  D -->|Federated| G[EXTERNAL_QUERY()]
+  G --> F
 
 
 ## 🧬 Plataforma Central – Curación y Federación
