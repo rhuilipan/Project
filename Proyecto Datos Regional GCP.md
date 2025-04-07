@@ -7,59 +7,17 @@
 
 1. [Introducción](#introduccion)
 
-2. [Contexto Inicial](#contexto_inicial)
-    - 1.1 Fase de Diseño
-    - 1.2 Sugerencia inicial: Alineación Estratégica
-    - 1.3 Enfoque Estratégico y Modelo de Ejecución:
-    - 1.4 Sugerencia inicial: Alineación Estratégica
-    - 1.5 Fase de Diseño: Co-creación de la Arquitectura
-    - 1.6 Fase de Ejecución: Enfoque Iterativo y Visible
+2. [Problemática](#problematica)
 
-3. [Alcance del Proyecto](#alcance-del-proyecto)
-    - 2.1 Qué incluye y qué no incluye la solución
-    - 2.2 Principales fuentes y sistemas involucrados
-    - 2.3 Equipos y regiones afectadas
+3. [Solución Propuesta](#solucion-propuesta)
 
-4. [Estrategia de Ejecución](#estrategia-de-ejecucion)
-    - 3.1 Plan de reuniones iniciales y workshops de descubrimiento
-    - 3.2 Metodología propuesta (Agile, milestones, etc.)
-    - 3.3 Roles clave y conformación de equipos (ej. Data Council)
+4. [Diagrama Solución](#diagrama-solucion)
+    
+5. [Flujo de Datos](#flujo-de-datos)
 
-5. [Evaluación de Alternativas Técnicas](#evaluacion-de-alternativas-tecnicas)
-    - 4.1 Análisis de opciones de arquitectura 
-    - 4.2 Criterios de decisión: rendimiento, gobernanza, costos, escalabilidad
-    - 4.3 Justificación de la solución elegida
+6. [Servicios y Costos Estimados](#servicios-y-costos-estimados)
 
-6. [Arquitectura Propuesta](#arquitectura-propuesta)
-    - 5.1 Diagrama general
-    - 5.2 Flujo de ingesta y procesamiento
-    - 5.3 Gobernanza, seguridad y control de calidad de datos
-    - 5.4 Consulta federada y mecanismos de explotación
-
-7. [Planificación de Esfuerzos](#planificacion-de-esfuerzos)
-    - 6.1 Estimación de recursos por etapa (personas/roles/skills)
-    - 6.2 Propuesta de staffing interno y externo
-    - 6.3 Capacitaciones necesarias y ramp-up
-
-8. [Evaluación Económica](#evaluación-economica)
-    - 7.1 Costos por servicio GCP estimados
-    - 7.2 Costos operativos y licencias (si aplica)
-    - 7.3 Escenarios de optimización y control de gasto
-
-9. [Plan de Entregables](#plan-de-entregables)
-    - 8.1 Hitos principales (MVPs, pilotos, fases)
-    - 8.2 Fechas estimadas de entrega por etapa
-    - 8.3 Métricas de éxito y criterios de aceptación
-
-10. [Riesgos y Estrategias de Mitigación](#eiesgos-y-estrategias-de-mitigacion)
-    - 9.1 Riesgos técnicos y organizacionales
-    - 9.2 Planes de contingencia y fallback
-    - 9.3 Monitoreo y revisión periódica
-
-11. [Conclusión y Siguientes Pasos](#conclusion-y-siguientes-pasos)
-    - 10.1 Impacto esperado
-    - 10.2 Propuesta de seguimiento y evolución continua
-    - 10.3 Formalización de acuerdos e inicio de ejecución
+7. [Conclusión y Recomendaciones](#conclusion-y-recomendaciones)
 
 ## Introducción
 
@@ -87,7 +45,7 @@ Se propone una **arquitectura federada**, que permita ingestar, catalogar y proc
 
 ---
 
-### Diagrama 
+### Diagrama Solución
 La solución propuesta se visualiza en el siguiente diagrama:
 
 
@@ -221,7 +179,6 @@ La solución incluye los siguientes componentes:
 ---
 
 ## Estrategias de Optimización
-
 - **Vistas materializadas** para reducir consultas interregionales costosas.
 - **BI Engine** para acelerar dashboards con caché en memoria.
 - **Job scheduling** de agregaciones pesadas en horarios de baja demanda.
@@ -241,7 +198,6 @@ La solución incluye los siguientes componentes:
 ---
 
 ## Recomendaciones
-
 - Establecer un proyecto “core” para almacenamiento y consumo central.
 - Aplicar IaC (Terraform) para replicabilidad y control de cambios.
 - Establecer prácticas DevOps/DataOps para despliegue y monitoreo.
@@ -259,6 +215,3 @@ Esta arquitectura federada permite a la compañía superar sus limitaciones actu
 
 El código, diagramas y documentación se encuentran en el siguiente repositorio público:  
 🔗 [https://github.com/juanperez/latam-challenge](https://github.com/juanperez/latam-challenge)
-
-Estructura recomendada del repositorio:
-
