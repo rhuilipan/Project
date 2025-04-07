@@ -5,7 +5,7 @@
 
 ---
 # Índice Propuesto – Documento de Proyecto Plataforma Federada
-    1. Introducción
+    1. [Introducción](#introduccion)
         1.1 Contexto general del negocio
         1.2 Motivación y problemática actual
         1.3 Objetivo del proyecto
