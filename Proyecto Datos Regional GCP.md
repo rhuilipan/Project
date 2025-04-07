@@ -60,7 +60,7 @@
     - 10.3 Formalización de acuerdos e inicio de ejecución
 
 
-## Contexto Inicial:
+## Contexto Inicial
 Con operaciones en múltiples regiones, nuestras unidades de negocio generan volúmenes significativos de datos diariamente, provenientes de sistemas locales diversos y arquitecturas regionalizadas. En este escenario, **la información es un activo crítico**, y la capacidad de integrarla y transformarla en insights accionables define nuestra ventaja competitiva.
 Hoy, nuestra organización enfrenta el desafío de romper con los silos de datos que existen entre regiones. Cada una ha evolucionado con autonomía, creando infraestructuras distintas que dificultan la interoperabilidad, encarecen el análisis y limitan nuestra capacidad de actuar a escala global.
 Desde la dirección ejecutiva se ha solicitado una **plataforma federada de datos** que permita una visión única del negocio, sin comprometer la autonomía local ni incurrir en costos excesivos. Este desafío implica visión, alineación cultural y excelencia operativa.
