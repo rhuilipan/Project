@@ -50,9 +50,9 @@ La solución propuesta se visualiza en el siguiente diagrama:
 
 
 
-#### 🗺️ Arquitectura de la Plataforma Federada de Datos – GCP
+### Arquitectura de la Plataforma Federada de Datos – GCP
 
-### 🌍 Región A / Proyecto Regional
+#### Región A / Proyecto Regional
 ```
 +-------------------------------------------------------------+
 |                 GCP Project: Region A (ej. us-east1)        |
@@ -70,7 +70,7 @@ La solución propuesta se visualiza en el siguiente diagrama:
         (Transformación)         (Eventos disparadores)
 
 ```
-### 🧬 Plataforma Central – Curación y Federación
+#### Plataforma Central – Curación y Federación
 ```
 +-------------------------------------------------------------+
 |                GCP Proyecto Centralizado (shared/core)      |
@@ -90,7 +90,7 @@ La solución propuesta se visualiza en el siguiente diagrama:
 +-------------------------------------------------------------+
 ```
 
-### Gobernanza, Metadatos y Seguridad
+#### Gobernanza, Metadatos y Seguridad
 ```
 +-------------------------------------------------------------+
 |                  Gobernanza y Control                       |
@@ -101,7 +101,7 @@ La solución propuesta se visualiza en el siguiente diagrama:
 +-------------------------------------------------------------+
 ```
 
-## Automatización y Orquestación
+#### Automatización y Orquestación
 ```
 +-------------------------------------------------------------+
 |                    Automatización                           |
