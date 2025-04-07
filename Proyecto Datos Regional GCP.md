@@ -4,23 +4,19 @@
 ### **Fecha**: Abril 2025
 
 ## Índice Propuesto – Documento de Proyecto Plataforma Federada
-1. [Introducción](#introduccion)
-    - 1.1 Contexto general del negocio
-    - 1.2 Motivación y problemática actual
-    - 1.3 Objetivo del proyecto
 
 1. [Contexto Inicial](#contexto_inicial)
-    - 1.1 Enfoque Estratégico y Modelo de Ejecución
-    - 1.2 Fase de Diseño
-    - 1.3 Objetivo del proyecto
+    - 1.1 Fase de Diseño
+    - 1.2 Sugerencia inicial: Alineación Estratégica
+    - 1.3 Enfoque Estratégico y Modelo de Ejecución:
+    - 1.4 Sugerencia inicial: Alineación Estratégica
+    - 1.5 Fase de Diseño: Co-creación de la Arquitectura
+    - 1.6 Fase de Ejecución: Enfoque Iterativo y Visible
 
 2. [Alcance del Proyecto](#alcance-del-proyecto)
-    - 2.1 Fase de Diseño
-    - 2.2 Sugerencia inicial: Alineación Estratégica
-    - 2.3 Enfoque Estratégico y Modelo de Ejecución:
-    - 2.4 Sugerencia inicial: Alineación Estratégica
-    - 2.5 Fase de Diseño: Co-creación de la Arquitectura
-    - 2.6 Fase de Ejecución: Enfoque Iterativo y Visible
+    - 2.1 Qué incluye y qué no incluye la solución
+    - 2.2 Principales fuentes y sistemas involucrados
+    - 2.3 Equipos y regiones afectadas
 
 3. [Estrategia de Ejecución](#estrategia-de-ejecucion)
     - 3.1 Plan de reuniones iniciales y workshops de descubrimiento
@@ -64,14 +60,7 @@
     - 10.3 Formalización de acuerdos e inicio de ejecución
 
 
-## 1. Introducción
-
-Este documento presenta una solución integral para construir una **plataforma de datos federada sobre Google Cloud Platform (GCP)**. Esta plataforma tiene como fin integrar y armonizar datos distribuidos geográficamente en distintas regiones y proyectos de GCP, permitiendo análisis corporativos eficientes sobre indicadores clave como rentabilidad de rutas, eficiencia de combustible y satisfacción del cliente.
-
-El objetivo es maximizar el **valor del dato** con una arquitectura escalable, gobernada y optimizada en costos, mediante servicios administrados de GCP, manteniendo alta disponibilidad y rendimiento en operaciones interregionales.
-
-
-## 1. Contexto Inicial:
+## Contexto Inicial:
 Con operaciones en múltiples regiones, nuestras unidades de negocio generan volúmenes significativos de datos diariamente, provenientes de sistemas locales diversos y arquitecturas regionalizadas. En este escenario, **la información es un activo crítico**, y la capacidad de integrarla y transformarla en insights accionables define nuestra ventaja competitiva.
 Hoy, nuestra organización enfrenta el desafío de romper con los silos de datos que existen entre regiones. Cada una ha evolucionado con autonomía, creando infraestructuras distintas que dificultan la interoperabilidad, encarecen el análisis y limitan nuestra capacidad de actuar a escala global.
 Desde la dirección ejecutiva se ha solicitado una **plataforma federada de datos** que permita una visión única del negocio, sin comprometer la autonomía local ni incurrir en costos excesivos. Este desafío implica visión, alineación cultural y excelencia operativa.
@@ -96,7 +85,7 @@ Más allá de diseñar una solución técnica, nuestra misión será construir u
 
 ---
 
-## 2. Problemática
+## Problemática
 
 Actualmente, la organización enfrenta desafíos técnicos y operativos derivados de:
 
@@ -108,13 +97,13 @@ Actualmente, la organización enfrenta desafíos técnicos y operativos derivado
 
 ---
 
-## 3. Solución Propuesta
+## Solución Propuesta
 
 Se propone una **arquitectura federada**, que permita ingestar, catalogar y procesar datos provenientes de BigQuery, Cloud Storage y CloudSQL en múltiples regiones de GCP, soportando flujos en **tiempo real y batch**, con herramientas nativas para gobernanza, eficiencia y análisis avanzado.
 
 ---
 
-### 3.1 Arquitectura General
+### Arquitectura General
 
 La solución incluye los siguientes componentes:
 *: cloud ran es gratis es para hacer api rest chicas: es serverless.
@@ -132,7 +121,7 @@ La solución incluye los siguientes componentes:
 
 ---
 
-### 3.2 Flujo de Datos
+### Flujo de Datos
 
 1. **Captura**
    - **CloudSQL (PostgreSQL)**: extraído con Dataflow vía JDBC.
@@ -155,7 +144,7 @@ La solución incluye los siguientes componentes:
 
 ---
 
-## 4. Servicios y Costos Estimados
+## Servicios y Costos Estimados
 
 | Servicio              | Rol en la Arquitectura | Estimación Mensual (USD) |
 |-----------------------|-------------------------|---------------------------|
@@ -173,7 +162,7 @@ La solución incluye los siguientes componentes:
 
 ---
 
-## 5. Gobernanza y Consistencia
+## Gobernanza y Consistencia
 
 - **Dataplex** se usará para definir zonas de datos: `raw`, `curated`, `analytics`.
 - **Data Catalog** permite clasificar y versionar esquemas.
@@ -182,7 +171,7 @@ La solución incluye los siguientes componentes:
 
 ---
 
-## 6. Estrategias de Optimización
+## Estrategias de Optimización
 
 - **Vistas materializadas** para reducir consultas interregionales costosas.
 - **BI Engine** para acelerar dashboards con caché en memoria.
@@ -191,7 +180,7 @@ La solución incluye los siguientes componentes:
 
 ---
 
-## 7. Riesgos y Mitigaciones
+## Riesgos y Mitigaciones
 
 | Riesgo                        | Mitigación                                   |
 |------------------------------|----------------------------------------------|
@@ -202,7 +191,7 @@ La solución incluye los siguientes componentes:
 
 ---
 
-## 8. Recomendaciones
+## Recomendaciones
 
 - Establecer un proyecto “core” para almacenamiento y consumo central.
 - Aplicar IaC (Terraform) para replicabilidad y control de cambios.
@@ -211,13 +200,13 @@ La solución incluye los siguientes componentes:
 
 ---
 
-## 9. Conclusión
+## Conclusión
 
 Esta arquitectura federada permite a la compañía superar sus limitaciones actuales de integración, disponibilidad y análisis de datos. Gracias a servicios nativos de GCP, se logra una solución moderna, segura, escalable y lista para habilitar tanto analítica descriptiva como casos de uso avanzados de inteligencia artificial y machine learning.
 
 ---
 
-## 10. Repositorio y Entrega
+## Repositorio y Entrega
 
 El código, diagramas y documentación se encuentran en el siguiente repositorio público:  
 🔗 [https://github.com/juanperez/latam-challenge](https://github.com/juanperez/latam-challenge)
