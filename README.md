@@ -13,11 +13,7 @@
 
 4. [Diagrama Solución](#diagrama-solucion)
     
-5. [Flujo de Datos](#flujo-de-datos)
-
-6. [Servicios y Costos Estimados](#servicios-y-costos-estimados)
-
-7. [Conclusión y Recomendaciones](#conclusion-y-recomendaciones)
+5. [Principales Preguntas](#principales-preguntas)
 
 ## Introducción
 
@@ -46,8 +42,6 @@ Se propone una **arquitectura federada**, que permita ingestar, catalogar y proc
 
 ### Diagrama Solución
 La solución propuesta se visualiza en el siguiente diagrama:
-
-
 
 ### Arquitectura de la Plataforma Federada de Datos – GCP
 
@@ -93,8 +87,9 @@ Cada región ya posee su propio proyecto en GCP, donde funcionan los sistemas y 
 |  | BI Engine + Looker Studio|                               |
 |  +---------------------------+                              |
 +-------------------------------------------------------------+
-El proyecto centralizado (por ejemplo, analytics-core) es el punto de convergencia donde se construye la visión global del negocio. Aquí se alojan los datasets armonizados en BigQuery, organizados por dominio de negocio (ej. rutas, pasajeros, reservas). Existen dos formas de obtener estos datos: la primera es a través de pipelines ETL que consolidan, transforman y cargan información desde los proyectos regionales hacia tablas curadas; la segunda es a través de consultas federadas (EXTERNAL_QUERY), que acceden directamente a los datos donde residen, sin necesidad de copiarlos. Para optimizar la experiencia de consumo, se construyen vistas materializadas que consolidan los indicadores más utilizados. Finalmente, las herramientas de visualización como Looker Studio acceden directamente a este entorno curado, apoyadas por BI Engine para acelerar tiempos de respuesta. Esta capa permite que los analistas trabajen con datos consistentes, trazables y de alto rendimiento.
 ```
+El proyecto centralizado (por ejemplo, analytics-core) es el punto de convergencia donde se construye la visión global del negocio. Aquí se alojan los datasets armonizados en BigQuery, organizados por dominio de negocio (ej. rutas, pasajeros, reservas). Existen dos formas de obtener estos datos: la primera es a través de pipelines ETL que consolidan, transforman y cargan información desde los proyectos regionales hacia tablas curadas; la segunda es a través de consultas federadas (EXTERNAL_QUERY), que acceden directamente a los datos donde residen, sin necesidad de copiarlos. Para optimizar la experiencia de consumo, se construyen vistas materializadas que consolidan los indicadores más utilizados. Finalmente, las herramientas de visualización como Looker Studio acceden directamente a este entorno curado, apoyadas por BI Engine para acelerar tiempos de respuesta. Esta capa permite que los analistas trabajen con datos consistentes, trazables y de alto rendimiento.
+
 
 #### Gobernanza, Metadatos, Seguridad y Orquestación
 ```
