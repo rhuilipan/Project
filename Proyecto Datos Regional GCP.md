@@ -93,22 +93,14 @@ La solución propuesta se visualiza en el siguiente diagrama:
 
 ## 🌍 Región A / Proyecto Regional
 
-```
-+-------------------------------------------------------------+
-|                 GCP Project: Region A (ej. us-east1)        |
-|                                                             |
-|  +-----------+    +--------------+    +-----------+         |
-|  | CloudSQL  |    | CloudStorage |    | BigQuery  |         |
-|  +-----+-----+    +------+-------+    +-----+-----+         |
-|        |                 |                  |               |
-|   +----v----+     +------v------+     +-----v-----+         |
-|   | Dataflow|     |   Pub/Sub   |     |EXPORT DATA|         |
-|   +---------+     +-------------+     +-----------+         |
-+-------------------------------------------------------------+
-              |                          |
-              v                          v
-        (Transformación)         (Eventos disparadores)
-```
+flowchart TD
+    A[CloudSQL] -->|ETL| B[Dataflow]
+    B --> C[BigQuery Raw]
+    C --> D[BigQuery Curated]
+    D --> E[Looker Studio]
+    C -->|Federated| F[EXTERNAL_QUERY()]
+    F --> E
+
 
 
 ## 🧬 Plataforma Central – Curación y Federación
