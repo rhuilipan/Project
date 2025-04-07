@@ -21,7 +21,7 @@ El presente documento detalla la propuesta de diseño, planificación y ejecuci�
 
 ---
 
-## Problemática
+##    Problemática
 
 Actualmente, la organización enfrenta las siguentes problemáticas:
 
