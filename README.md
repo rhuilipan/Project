@@ -15,7 +15,7 @@
     
 5. [Principales Preguntas](#principales-preguntas)
 -------
-## Introducción
+##    Introduccion
 
 El presente documento detalla la propuesta de diseño, planificación y ejecución para una plataforma federada de datos en Google Cloud Platform, adaptada al contexto de una organización global del sector aeronáutico. En la actualidad, los datos operativos, comerciales y de experiencia del cliente se encuentran dispersos en múltiples regiones, proyectos y sistemas. Esto dificulta la generación de métricas consistentes, retrasa la toma de decisiones y limita el uso avanzado de datos (machine learning, personalización, etc.). El objetivo del proyecto es diseñar una solución técnica y organizacional que habilite la integración de datos multirregión con un enfoque moderno, gobernado y orientado al autoservicio, utilizando capacidades nativas de GCP como BigQuery, Dataflow, Dataplex, Pub/Sub, y otros.
 
