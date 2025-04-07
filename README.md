@@ -7,11 +7,11 @@
 
 1. [Introducción](#introducción)
 
-2. [Problematica](#problematica)
+2. [Problemática](#problemática)
 
-3. [Solucion Propuesta](#solucion-propuesta)
+3. [Solución Propuesta](#solución-propuesta)
 
-4. [Diagrama Solucion](#diagrama-solucion)
+4. [Diagrama Solución](#diagrama-solución)
     
 5. [Principales Preguntas](#principales-preguntas)
 -------
@@ -21,7 +21,7 @@ El presente documento detalla la propuesta de diseño, planificación y ejecuci�
 
 ---
 
-##    Problematica
+##    Problemática
 
 Actualmente, la organización enfrenta las siguentes problemáticas:
 
@@ -33,14 +33,14 @@ Actualmente, la organización enfrenta las siguentes problemáticas:
 
 ---
 
-## Solucion Propuesta
+## Solución Propuesta
 Previo al inicio de la solución técnica, es crucial comenzar con una serie de reuniones de exploración regional que faciliten comprender las características operativas y analíticas de cada región, junto con un mapa de madurez de datos que detecte vacíos, oportunidades y estructuras de esquemas. La arquitectura se desarrollará en colaboración con un **Data Platform Council**, compuesto por líderes técnicos regionales y representantes del proveedor de cloud, garantizando alineación, sostenibilidad y adopción anticipada. La implementación se llevará a cabo a través de un esquema iterativo e incremental, proporcionando un valor tangible en cada sprint y incentivando la visibilidad constante a través de demos quincenales y ambientes de prueba ("sandbox") para los usuarios claves, garantizando de esta manera un desarrollo orgánico y colaborativo del plan.
 
 Se propone una **arquitectura federada**, que permita ingestar, catalogar y procesar datos provenientes de BigQuery, Cloud Storage y CloudSQL en múltiples regiones de GCP, soportando flujos en **tiempo real y batch**, con herramientas nativas para gobernanza, eficiencia y análisis avanzado.
 
 ---
 
-## Diagrama Solucion
+## Diagrama Solución
 La solución propuesta se visualiza en el siguiente diagrama:
 
 ### Arquitectura de la Plataforma Federada de Datos – GCP
