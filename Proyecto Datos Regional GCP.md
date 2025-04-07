@@ -38,8 +38,7 @@ Actualmente, la organización enfrenta las siguentes problemáticas:
 ---
 
 ## Solución Propuesta
-
-Antes de empezar con la solución técnica, es indispensable iniciar con una serie de reuniones de descubrimiento regional que permitan entender las particularidades operativas y analíticas de cada zona, complementadas con un mapa de madurez de datos que identifique brechas, oportunidades y estructuras de esquemas. La arquitectura será co-creada en conjunto con un **Data Platform Council ***, conformado por líderes técnicos regionales y representantes del proveedor cloud, asegurando alineación, sostenibilidad y adopción temprana. La ejecución se realizará mediante un modelo iterativo e incremental, entregando valor tangible en cada sprint y promoviendo visibilidad continua a través de demos quincenales y entornos de prueba ("sandbox") para usuarios clave, garantizando así una evolución orgánica y colaborativa del proyecto.
+Previo al inicio de la solución técnica, es crucial comenzar con una serie de reuniones de exploración regional que faciliten comprender las características operativas y analíticas de cada región, junto con un mapa de madurez de datos que detecte vacíos, oportunidades y estructuras de esquemas. La arquitectura se desarrollará en colaboración con un **Data Platform Council**, compuesto por líderes técnicos regionales y representantes del proveedor de cloud, garantizando alineación, sostenibilidad y adopción anticipada. La implementación se llevará a cabo a través de un esquema iterativo e incremental, proporcionando un valor tangible en cada sprint y incentivando la visibilidad constante a través de demos quincenales y ambientes de prueba ("sandbox") para los usuarios claves, garantizando de esta manera un desarrollo orgánico y colaborativo del plan.
 
 Se propone una **arquitectura federada**, que permita ingestar, catalogar y procesar datos provenientes de BigQuery, Cloud Storage y CloudSQL en múltiples regiones de GCP, soportando flujos en **tiempo real y batch**, con herramientas nativas para gobernanza, eficiencia y análisis avanzado.
 
@@ -55,42 +54,49 @@ La solución propuesta se visualiza en el siguiente diagrama:
 #### Región A / Proyecto Regional
 ```
 +-------------------------------------------------------------+
-|                 GCP Project: Region A (ej. us-east1)        |
+|                    Proyecto Regional A                      |
 |                                                             |
-|  +-----------+    +--------------+    +-----------+         |
-|  | CloudSQL  |    | CloudStorage |    | BigQuery  |         |
-|  +-----+-----+    +------+-------+    +-----+-----+         |
-|        |                 |                  |               |
-|   +----v----+     +------v------+     +-----v-----+         |
-|   | Dataflow|     |   Pub/Sub   |     |EXPORT DATA|         |
-|   +---------+     +-------------+     +-----------+         |
+|  +-----------+   +--------------+    +-----------+          |
+|  | CloudSQL  |   | CloudStorage |    | BigQuery  |          |
+|  +-----+-----+   +------+-------+    +-----+-----+          |
+|        |                |                  |                |
+|   +----v----+     +-----v------+     +-----v-----+          |
+|   | Dataflow|     |  Pub/Sub   |     |EXPORT DATA|          |
+|   +---------+     +------------+     +-----------+          |
+|        |                  |                                 |
+|        |             +----v------+                          |
+|        +------------>|Cloud Func.|                          |
+|                      +-----------+                          |
 +-------------------------------------------------------------+
-              |                          |
-              v                          v
-        (Transformación)         (Eventos disparadores)
-
+                          |
+                          v
+              (Federated query or shared staging)
 ```
+Cada región ya posee su propio proyecto en GCP, donde funcionan los sistemas y fuentes de datos de la zona. Estas fuentes comprenden bases de datos PostgreSQL en CloudSQL, archivos en el Almacenamiento Cloud (GCS), y tablas analíticas propias en BigQuery. Desde ese punto, la captura de datos se realiza de manera híbrida: por un lado, los procesos batch con Dataflow se vinculan con CloudSQL para obtener datos de manera periódica; por otro, los sucesos de carga en GCS activan funciones en Cloud Functions, las cuales se publican en Pub/Sub y generan pipelines de consumo en tiempo real. Para BigQuery, se utilizan herramientas nativas como EXPORT DATA para exportar subconjuntos de tablas a una zona compartida, o se realiza una consulta directa a través de la federación. Cada componente regional mantiene autonomía y su propia frecuencia de actualización, pero aporta sus datos a la plataforma central sin alterar sus procesos locales.
+
+
 #### Plataforma Central – Curación y Federación
 ```
 +-------------------------------------------------------------+
-|                GCP Proyecto Centralizado (shared/core)      |
+|              Plataforma Central (analytics-core)            |
 |                                                             |
 |  +-----------------------+    +--------------------------+  |
-|  | Curated BQ Datasets   |    | External Tables (SQL/CS) |  |
+|  | Curated BQ Datasets   |    | External Tables (BQ/SQL) |  |
 |  +----------+------------+    +------------+-------------+  |
 |             v                              v                |
-|       +-------------+          +---------------------+      |
-|       | Materialized|<-------->|  EXTERNAL_QUERY()   |      |
-|       |   Views     |          +---------------------+      |
-|       +------+------+
-|              v
-|  +--------------------------+
-|  | BI Engine + Looker Studio|
-|  +--------------------------+
+|       +-------------+          +----------------------+     |
+|       |Materialized |<-------->|   EXTERNAL_QUERY     |     |
+|       |   Views     |          +----------------------+     |
+|       +------+------+                                       |
+|              v                                              |
+|  +---------------------------+                              |
+|  | BI Engine + Looker Studio|                               |
+|  +---------------------------+                              |
 +-------------------------------------------------------------+
+El proyecto centralizado (por ejemplo, analytics-core) es el punto de convergencia donde se construye la visión global del negocio. Aquí se alojan los datasets armonizados en BigQuery, organizados por dominio de negocio (ej. rutas, pasajeros, reservas). Existen dos formas de obtener estos datos: la primera es a través de pipelines ETL que consolidan, transforman y cargan información desde los proyectos regionales hacia tablas curadas; la segunda es a través de consultas federadas (EXTERNAL_QUERY), que acceden directamente a los datos donde residen, sin necesidad de copiarlos. Para optimizar la experiencia de consumo, se construyen vistas materializadas que consolidan los indicadores más utilizados. Finalmente, las herramientas de visualización como Looker Studio acceden directamente a este entorno curado, apoyadas por BI Engine para acelerar tiempos de respuesta. Esta capa permite que los analistas trabajen con datos consistentes, trazables y de alto rendimiento.
 ```
 
-#### Gobernanza, Metadatos y Seguridad
+#### Gobernanza, Metadatos, Seguridad y Orquestación
 ```
 +-------------------------------------------------------------+
 |                  Gobernanza y Control                       |
@@ -99,10 +105,6 @@ La solución propuesta se visualiza en el siguiente diagrama:
 |  | (zonas     |  | (metadatos)  |  | Auditoría / Roles    | |
 |  |  raw/etc)  |  +--------------+  +----------------------+ |
 +-------------------------------------------------------------+
-```
-
-#### Automatización y Orquestación
-```
 +-------------------------------------------------------------+
 |                    Automatización                           |
 |  +------------+  +----------------+  +---------------------+|
@@ -110,108 +112,19 @@ La solución propuesta se visualiza en el siguiente diagrama:
 |  +------------+  +----------------+  +---------------------+|
 +-------------------------------------------------------------+
 ```
-
-
-La solución incluye los siguientes componentes:
-*: cloud ran es gratis es para hacer api rest chicas: es serverless.
-*: flask 
-
-- **Cloud Pub/Sub**: canal de ingestión de eventos para procesamiento en tiempo real.
-- **Cloud Functions**: disparadores ligeros para automatización basada en eventos.
-- **Cloud Dataflow**: procesamiento ETL/ELT en batch y streaming.
-- **Cloud Storage**: zona de datos crudos y almacenamiento intermedio.
-- **BigQuery**: motor principal de almacenamiento analítico y federación SQL.
-- **BigQuery Omni** (opcional): consultas entre nubes o regiones remotas.
-- **Dataplex**: gobernanza de datos y definición de zonas (raw, curado, analítico).
-- **Data Catalog**: catálogo de metadatos y control de versiones de esquemas.
-- **Looker / BI Engine**: visualización y análisis de alto rendimiento.
+Para asegurar control, cumplimiento y sostenibilidad en toda la plataforma, se establece una capa transversal de gobernanza y automatización. Dataplex organiza los datos en zonas lógicas (raw, curated, analytics), define dominios y aplica políticas automáticas según el ciclo de vida del dato. Junto con Data Catalog, permite clasificar activos con etiquetas personalizadas (como confidencialidad, dominio de negocio, calidad, región de origen) y mantener un catálogo único de metadatos accesible por todos los equipos. Por otro lado, IAM y Cloud Monitoring se utilizan para controlar accesos granulares, auditar el uso y monitorear errores o anomalías en los pipelines. Toda la infraestructura y lógica se gestiona con Terraform (IaC) para garantizar reproducibilidad y estandarización. Además, se implementan workflows programados con Cloud Scheduler y despliegues automatizados con Cloud Build, asegurando que los pipelines batch y vistas materializadas se actualicen con consistencia y sin intervención manual.
 
 ---
+## Principales Preguntas:
 
-### Flujo de Datos
+### ¿Cómo se ingieren, catalogan y procesan los datos entre regiones?
+    Los datos serán ingeridos desde fuentes regionales existentes (CloudSQL, GCS, BigQuery) utilizando pipelines batch con Dataflow y triggers en tiempo real con Pub/Sub + Cloud Functions. Los datos curados o armonizados se almacenan en BigQuery centralizado, mientras que los datos no replicados se consultan vía queries federadas. Todo lo ingestado se catalogará automáticamente con Data Catalog y se clasificará en zonas lógicas mediante Dataplex, permitiendo trazabilidad y control en toda la plataforma.
 
-1. **Captura**
-   - **CloudSQL (PostgreSQL)**: extraído con Dataflow vía JDBC.
-   - **Cloud Storage**: eventos `OBJECT_FINALIZE` disparan funciones para ETL.
-   - **BigQuery**: datasets regionales exportados con `EXPORT DATA`.
+### ¿Cómo se gestiona la consistencia de los esquemas y el versionado?
+    Se implementará un esquema de versionado centralizado en JSON Schema almacenado en Git, con validaciones automáticas en cada pipeline de Dataflow. Además, se aplicarán convenciones de nomenclatura y mapeo de campos por dominio, soportadas por una capa de transformación curada en BigQuery, garantizando que todos los datos cumplan con estructuras esperadas antes de ser expuestos para el análisis.
 
-2. **Ingesta**
-   - Archivos aterrizan en buckets por región/domino (`raw/region_x/...`).
-   - Cloud Dataflow mueve datos a BigQuery y los transforma.
+### ¿Cómo se optimiza el rendimiento y el costo de las consultas entre regiones?
+    Se priorizará el uso de EXTERNAL_QUERY() selectivo para análisis exploratorios, y se construirán vistas materializadas para KPIs recurrentes o dashboards críticos, evitando escaneo de grandes volúmenes remotos. Además, se utilizará particionamiento, clustering y BI Engine para reducir el costo por TB procesado y mejorar la latencia de respuesta en consultas complejas y distribuidas.
 
-3. **Procesamiento**
-   - Transformación y normalización de esquemas.
-   - Aplicación de reglas de negocio (e.g., conversión de monedas, unificación de columnas).
-   - Consolidación en datasets curados listos para análisis.
-
-4. **Federación y Consumo**
-   - Consultas SQL desde BigQuery entre regiones o proyectos.
-   - Materialización de vistas para KPIs de alta demanda.
-   - Dashboards en Looker / Data Studio con acceso controlado.
-
----
-
-## Servicios y Costos Estimados
-
-| Servicio              | Rol en la Arquitectura | Estimación Mensual (USD) |
-|-----------------------|-------------------------|---------------------------|
-| **Cloud Pub/Sub**     | Ingesta de eventos      | $10 – $20                 |
-| **Cloud Functions**   | Disparadores            | $5 – $15                  |
-| **Cloud Storage**     | 10 TB (landing/raw)     | $100 – $150               |
-| **CloudSQL**          | PostgreSQL regional     | $200 – $500               |
-| **Cloud Dataflow**    | Procesamiento diario    | $500 – $1,200             |
-| **BigQuery**          | 10 TB almacenados + 5 TB consultados | $400 – $800 |
-| **BigQuery Omni**     | Opcional (multi-cloud)  | $100 – $300               |
-| **Dataplex / Catalog**| Gobernanza, metadatos   | Sin costo directo         |
-| **Looker / Studio**   | BI y dashboards         | Incluido (según plan)     |
-
-> ⚠️ Los costos varían según el volumen de datos, frecuencia de consulta, y ubicación regional. Se recomienda aplicar prácticas como **particionado, clustering y uso de vistas materializadas** para optimizar.
-
----
-
-## Gobernanza y Consistencia
-
-- **Dataplex** se usará para definir zonas de datos: `raw`, `curated`, `analytics`.
-- **Data Catalog** permite clasificar y versionar esquemas.
-- Los pipelines incorporan validación de esquema antes de cargar datos.
-- Uso de JSON schemas versionados con Git para asegurar integridad en transformaciones.
-
----
-
-## Estrategias de Optimización
-- **Vistas materializadas** para reducir consultas interregionales costosas.
-- **BI Engine** para acelerar dashboards con caché en memoria.
-- **Job scheduling** de agregaciones pesadas en horarios de baja demanda.
-- **Dataflow autoscaling** para adaptarse al volumen dinámico.
-
----
-
-## Riesgos y Mitigaciones
-
-| Riesgo                        | Mitigación                                   |
-|------------------------------|----------------------------------------------|
-| Latencia entre regiones      | Caching + vistas materializadas              |
-| Cambios en esquemas fuente   | Validación automática + versionado de esquema |
-| Costos de escaneo elevado    | Particionado + Clustering + vistas agregadas |
-| Fallos en pipelines          | Alertas + retries + DLQ con Pub/Sub          |
-
----
-
-## Recomendaciones
-- Establecer un proyecto “core” para almacenamiento y consumo central.
-- Aplicar IaC (Terraform) para replicabilidad y control de cambios.
-- Establecer prácticas DevOps/DataOps para despliegue y monitoreo.
-- Monitorear adopción y calidad de datos con herramientas de lineage.
-
----
-
-## Conclusión
-
-Esta arquitectura federada permite a la compañía superar sus limitaciones actuales de integración, disponibilidad y análisis de datos. Gracias a servicios nativos de GCP, se logra una solución moderna, segura, escalable y lista para habilitar tanto analítica descriptiva como casos de uso avanzados de inteligencia artificial y machine learning.
-
----
-
-## Repositorio y Entrega
-
-El código, diagramas y documentación se encuentran en el siguiente repositorio público:  
-🔗 [https://github.com/juanperez/latam-challenge](https://github.com/juanperez/latam-challenge)
+### ¿Qué compensaciones (trade-offs) y estrategias de respaldo se consideran (por ejemplo: caching, vistas materializadas)?
+    La principal compensación está entre latencia vs. duplicación de datos. Para mantener bajo costo y evitar redundancia, las consultas federadas con indicadas, pero cuando la performance sea crítica, las vistas materializadas o replicación selectiva serán mas adecuadas. Como fallback, se usarán zonas de staging en GCS y pipelines batch programados para sincronizar datasets clave cuando la federación no sea viable por volumen o SLA.
