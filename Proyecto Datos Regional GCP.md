@@ -9,10 +9,18 @@
     - 1.2 Motivación y problemática actual
     - 1.3 Objetivo del proyecto
 
+1. [Contexto Inicial](#contexto_inicial)
+    - 1.1 Enfoque Estratégico y Modelo de Ejecución
+    - 1.2 Fase de Diseño
+    - 1.3 Objetivo del proyecto
+
 2. [Alcance del Proyecto](#alcance-del-proyecto)
-    - 2.1 Qué incluye y qué no incluye la solución
-    - 2.2 Principales fuentes y sistemas involucrados
-    - 2.3 Equipos y regiones afectadas
+    - 2.1 Fase de Diseño
+    - 2.2 Sugerencia inicial: Alineación Estratégica
+    - 2.3 Enfoque Estratégico y Modelo de Ejecución:
+    - 2.4 Sugerencia inicial: Alineación Estratégica
+    - 2.5 Fase de Diseño: Co-creación de la Arquitectura
+    - 2.6 Fase de Ejecución: Enfoque Iterativo y Visible
 
 3. [Estrategia de Ejecución](#estrategia-de-ejecucion)
     - 3.1 Plan de reuniones iniciales y workshops de descubrimiento
@@ -20,7 +28,7 @@
     - 3.3 Roles clave y conformación de equipos (ej. Data Council)
 
 4. [Evaluación de Alternativas Técnicas](#evaluacion-de-alternativas-tecnicas)
-    - 4.1 Análisis de opciones de arquitectura
+    - 4.1 Análisis de opciones de arquitectura 
     - 4.2 Criterios de decisión: rendimiento, gobernanza, costos, escalabilidad
     - 4.3 Justificación de la solución elegida
 
@@ -63,6 +71,27 @@ Este documento presenta una solución integral para construir una **plataforma d
 El objetivo es maximizar el **valor del dato** con una arquitectura escalable, gobernada y optimizada en costos, mediante servicios administrados de GCP, manteniendo alta disponibilidad y rendimiento en operaciones interregionales.
 
 
+## 1. Contexto Inicial:
+Con operaciones en múltiples regiones, nuestras unidades de negocio generan volúmenes significativos de datos diariamente, provenientes de sistemas locales diversos y arquitecturas regionalizadas. En este escenario, **la información es un activo crítico**, y la capacidad de integrarla y transformarla en insights accionables define nuestra ventaja competitiva.
+Hoy, nuestra organización enfrenta el desafío de romper con los silos de datos que existen entre regiones. Cada una ha evolucionado con autonomía, creando infraestructuras distintas que dificultan la interoperabilidad, encarecen el análisis y limitan nuestra capacidad de actuar a escala global.
+Desde la dirección ejecutiva se ha solicitado una **plataforma federada de datos** que permita una visión única del negocio, sin comprometer la autonomía local ni incurrir en costos excesivos. Este desafío implica visión, alineación cultural y excelencia operativa.
+
+### Enfoque Estratégico y Modelo de Ejecución:
+Más allá de diseñar una solución técnica, nuestra misión será construir una plataforma que escale con el negocio, inspire confianza y acelere la toma de decisiones en todas las áreas.
+
+### Sugerencia inicial: Alineación Estratégica
+- Iniciaremos con una **serie de workshops de descubrimiento regional**, donde participarán los equipos técnicos y de negocio de cada zona. Queremos entender las particularidades de cada operación: tipos de datos, necesidades analíticas, restricciones regulatorias, etc.
+- A su vez, desarrollaremos un **mapa de madurez de datos**, identificando brechas y oportunidades por región, con el fin de construir una solución flexible y priorizada.
+
+
+### Fase de Diseño: Co-creación de la Arquitectura
+- Se conformará un **Data Platform Council**, compuesto por referentes técnicos y líderes de producto de cada región. Esto nos permitirá garantizar el buy-in desde el inicio y evitar soluciones "impuestas".
+- Las decisiones clave (gobernanza, zonificación de datos, particionamiento regional, etc.) se discutirán en este foro con foco en sostenibilidad y escalabilidad.
+
+### Fase de Ejecución: Enfoque Iterativo y Visible
+- Ejecutaremos el proyecto bajo un **modelo de entrega incremental (Agile)**, donde cada sprint entregará valor tangible: pipelines funcionales, catálogos publicados, dashboards unificados, etc.
+- Organizaremos **demos quincenales abiertas** para todo el equipo ejecutivo, asegurando visibilidad, transparencia y alineación continua.
+- Además, habilitaremos un **entorno de "sandbox" para analistas clave**, donde podrán probar la plataforma antes de su despliegue oficial.
 
 
 ---
