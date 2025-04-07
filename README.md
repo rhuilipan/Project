@@ -15,13 +15,13 @@
     
 5. [Principales Preguntas](#principales-preguntas)
 -------
-##    Introduccion
 
+##    Introduccion
 El presente documento detalla la propuesta de diseño, planificación y ejecución para una plataforma federada de datos en Google Cloud Platform, adaptada al contexto de una organización global del sector aeronáutico. En la actualidad, los datos operativos, comerciales y de experiencia del cliente se encuentran dispersos en múltiples regiones, proyectos y sistemas. Esto dificulta la generación de métricas consistentes, retrasa la toma de decisiones y limita el uso avanzado de datos (machine learning, personalización, etc.). El objetivo del proyecto es diseñar una solución técnica y organizacional que habilite la integración de datos multirregión con un enfoque moderno, gobernado y orientado al autoservicio, utilizando capacidades nativas de GCP como BigQuery, Dataflow, Dataplex, Pub/Sub, y otros.
 
 ---
 
-##    Problemática
+##    Problematica
 
 Actualmente, la organización enfrenta las siguentes problemáticas:
 
@@ -33,14 +33,14 @@ Actualmente, la organización enfrenta las siguentes problemáticas:
 
 ---
 
-## Solución Propuesta
+## Solucion Propuesta
 Previo al inicio de la solución técnica, es crucial comenzar con una serie de reuniones de exploración regional que faciliten comprender las características operativas y analíticas de cada región, junto con un mapa de madurez de datos que detecte vacíos, oportunidades y estructuras de esquemas. La arquitectura se desarrollará en colaboración con un **Data Platform Council**, compuesto por líderes técnicos regionales y representantes del proveedor de cloud, garantizando alineación, sostenibilidad y adopción anticipada. La implementación se llevará a cabo a través de un esquema iterativo e incremental, proporcionando un valor tangible en cada sprint y incentivando la visibilidad constante a través de demos quincenales y ambientes de prueba ("sandbox") para los usuarios claves, garantizando de esta manera un desarrollo orgánico y colaborativo del plan.
 
 Se propone una **arquitectura federada**, que permita ingestar, catalogar y procesar datos provenientes de BigQuery, Cloud Storage y CloudSQL en múltiples regiones de GCP, soportando flujos en **tiempo real y batch**, con herramientas nativas para gobernanza, eficiencia y análisis avanzado.
 
 ---
 
-## Diagrama Solución
+## Diagrama Solucion
 La solución propuesta se visualiza en el siguiente diagrama:
 
 ### Arquitectura de la Plataforma Federada de Datos – GCP
