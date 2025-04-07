@@ -5,13 +5,13 @@
 
 ## Índice Propuesto – Documento de Proyecto Plataforma Federada
 
-- [Introduccion](#introduccion)
+1. [Introduccion](#introduccion)
 
-- [Problemática](#problematica)
+2. [Problematica](#problematica)
 
-3. [Solución Propuesta](#solucion-propuesta)
+3. [Solucion Propuesta](#solucion-propuesta)
 
-4. [Diagrama Solución](#diagrama-solucion)
+4. [Diagrama Solucion](#diagrama-solucion)
     
 5. [Principales Preguntas](#principales-preguntas)
 -------
@@ -40,7 +40,7 @@ Se propone una **arquitectura federada**, que permita ingestar, catalogar y proc
 
 ---
 
-### Diagrama Solución
+## Diagrama Solución
 La solución propuesta se visualiza en el siguiente diagrama:
 
 ### Arquitectura de la Plataforma Federada de Datos – GCP
@@ -113,13 +113,13 @@ Para asegurar control, cumplimiento y sostenibilidad en toda la plataforma, se e
 ## Principales Preguntas:
 
 ### ¿Cómo se ingieren, catalogan y procesan los datos entre regiones?
-    Los datos serán ingeridos desde fuentes regionales existentes (CloudSQL, GCS, BigQuery) utilizando pipelines batch con Dataflow y triggers en tiempo real con Pub/Sub + Cloud Functions. Los datos curados o armonizados se almacenan en BigQuery centralizado, mientras que los datos no replicados se consultan vía queries federadas. Todo lo ingestado se catalogará automáticamente con Data Catalog y se clasificará en zonas lógicas mediante Dataplex, permitiendo trazabilidad y control en toda la plataforma.
+Los datos serán ingeridos desde fuentes regionales existentes (CloudSQL, GCS, BigQuery) utilizando pipelines batch con Dataflow y triggers en tiempo real con Pub/Sub + Cloud Functions. Los datos curados o armonizados se almacenan en BigQuery centralizado, mientras que los datos no replicados se consultan vía queries federadas. Todo lo ingestado se catalogará automáticamente con Data Catalog y se clasificará en zonas lógicas mediante Dataplex, permitiendo trazabilidad y control en toda la plataforma.
 
 ### ¿Cómo se gestiona la consistencia de los esquemas y el versionado?
-    Se implementará un esquema de versionado centralizado en JSON Schema almacenado en Git, con validaciones automáticas en cada pipeline de Dataflow. Además, se aplicarán convenciones de nomenclatura y mapeo de campos por dominio, soportadas por una capa de transformación curada en BigQuery, garantizando que todos los datos cumplan con estructuras esperadas antes de ser expuestos para el análisis.
+Se implementará un esquema de versionado centralizado en JSON Schema almacenado en Git, con validaciones automáticas en cada pipeline de Dataflow. Además, se aplicarán convenciones de nomenclatura y mapeo de campos por dominio, soportadas por una capa de transformación curada en BigQuery, garantizando que todos los datos cumplan con estructuras esperadas antes de ser expuestos para el análisis.
 
 ### ¿Cómo se optimiza el rendimiento y el costo de las consultas entre regiones?
-    Se priorizará el uso de EXTERNAL_QUERY() selectivo para análisis exploratorios, y se construirán vistas materializadas para KPIs recurrentes o dashboards críticos, evitando escaneo de grandes volúmenes remotos. Además, se utilizará particionamiento, clustering y BI Engine para reducir el costo por TB procesado y mejorar la latencia de respuesta en consultas complejas y distribuidas.
+Se priorizará el uso de EXTERNAL_QUERY() selectivo para análisis exploratorios, y se construirán vistas materializadas para KPIs recurrentes o dashboards críticos, evitando escaneo de grandes volúmenes remotos. Además, se utilizará particionamiento, clustering y BI Engine para reducir el costo por TB procesado y mejorar la latencia de respuesta en consultas complejas y distribuidas.
 
 ### ¿Qué compensaciones (trade-offs) y estrategias de respaldo se consideran (por ejemplo: caching, vistas materializadas)?
-    La principal compensación está entre latencia vs. duplicación de datos. Para mantener bajo costo y evitar redundancia, las consultas federadas con indicadas, pero cuando la performance sea crítica, las vistas materializadas o replicación selectiva serán mas adecuadas. Como fallback, se usarán zonas de staging en GCS y pipelines batch programados para sincronizar datasets clave cuando la federación no sea viable por volumen o SLA.
+La principal compensación está entre latencia vs. duplicación de datos. Para mantener bajo costo y evitar redundancia, las consultas federadas con indicadas, pero cuando la performance sea crítica, las vistas materializadas o replicación selectiva serán mas adecuadas. Como fallback, se usarán zonas de staging en GCS y pipelines batch programados para sincronizar datasets clave cuando la federación no sea viable por volumen o SLA.
