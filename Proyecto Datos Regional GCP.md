@@ -5,55 +5,55 @@
 
 ## Índice Propuesto – Documento de Proyecto Plataforma Federada
 1. [Introducción](#introduccion)
-    1.1 Contexto general del negocio
-    1.2 Motivación y problemática actual
-    1.3 Objetivo del proyecto
+    - 1.1 Contexto general del negocio
+    - 1.2 Motivación y problemática actual
+    - 1.3 Objetivo del proyecto
 
-2. [Alcance del Proyecto](#alcance del proyecto)
-    2.1 Qué incluye y qué no incluye la solución
-    2.2 Principales fuentes y sistemas involucrados
-    2.3 Equipos y regiones afectadas
+2. [Alcance del Proyecto](#alcance-del-proyecto)
+    - 2.1 Qué incluye y qué no incluye la solución
+    - 2.2 Principales fuentes y sistemas involucrados
+    - 2.3 Equipos y regiones afectadas
 
-3. Estrategia de Ejecución
-    3.1 Plan de reuniones iniciales y workshops de descubrimiento
-    3.2 Metodología propuesta (Agile, milestones, etc.)
-    3.3 Roles clave y conformación de equipos (ej. Data Council)
+3. [Estrategia de Ejecución](#estrategia-de-ejecucion)
+    - 3.1 Plan de reuniones iniciales y workshops de descubrimiento
+    - 3.2 Metodología propuesta (Agile, milestones, etc.)
+    - 3.3 Roles clave y conformación de equipos (ej. Data Council)
 
-4. Evaluación de Alternativas Técnicas
-    4.1 Análisis de opciones de arquitectura
-    4.2 Criterios de decisión: rendimiento, gobernanza, costos, escalabilidad
-    4.3 Justificación de la solución elegida
+4. [Evaluación de Alternativas Técnicas](#evaluacion-de-alternativas-tecnicas)
+    - 4.1 Análisis de opciones de arquitectura
+    - 4.2 Criterios de decisión: rendimiento, gobernanza, costos, escalabilidad
+    - 4.3 Justificación de la solución elegida
 
-5. Arquitectura Propuesta
-    5.1 Diagrama general
-    5.2 Flujo de ingesta y procesamiento
-    5.3 Gobernanza, seguridad y control de calidad de datos
-    5.4 Consulta federada y mecanismos de explotación
+5. [Arquitectura Propuesta](#arquitectura-propuesta)
+    - 5.1 Diagrama general
+    - 5.2 Flujo de ingesta y procesamiento
+    - 5.3 Gobernanza, seguridad y control de calidad de datos
+    - 5.4 Consulta federada y mecanismos de explotación
 
-6. Planificación de Esfuerzos
-    6.1 Estimación de recursos por etapa (personas/roles/skills)
-    6.2 Propuesta de staffing interno y externo
-    6.3 Capacitaciones necesarias y ramp-up
+6. [Planificación de Esfuerzos](#planificacion-de-esfuerzos)
+    - 6.1 Estimación de recursos por etapa (personas/roles/skills)
+    - 6.2 Propuesta de staffing interno y externo
+    - 6.3 Capacitaciones necesarias y ramp-up
 
-7. Evaluación Económica
-    7.1 Costos por servicio GCP estimados
-    7.2 Costos operativos y licencias (si aplica)
-    7.3 Escenarios de optimización y control de gasto
+7. [Evaluación Económica](#evaluación-economica)
+    - 7.1 Costos por servicio GCP estimados
+    - 7.2 Costos operativos y licencias (si aplica)
+    - 7.3 Escenarios de optimización y control de gasto
 
-8. Plan de Entregables
-    8.1 Hitos principales (MVPs, pilotos, fases)
-    8.2 Fechas estimadas de entrega por etapa
-    8.3 Métricas de éxito y criterios de aceptación
+8. [Plan de Entregables](#plan-de-entregables)
+    - 8.1 Hitos principales (MVPs, pilotos, fases)
+    - 8.2 Fechas estimadas de entrega por etapa
+    - 8.3 Métricas de éxito y criterios de aceptación
 
-9. Riesgos y Estrategias de Mitigación
-    9.1 Riesgos técnicos y organizacionales
-    9.2 Planes de contingencia y fallback
-    9.3 Monitoreo y revisión periódica
+9. [Riesgos y Estrategias de Mitigación](#eiesgos-y-estrategias-de-mitigacion)
+    - 9.1 Riesgos técnicos y organizacionales
+    - 9.2 Planes de contingencia y fallback
+    - 9.3 Monitoreo y revisión periódica
 
-10. Conclusión y Siguientes Pasos
-    10.1 Impacto esperado
-    10.2 Propuesta de seguimiento y evolución continua
-    10.3 Formalización de acuerdos e inicio de ejecución
+10. [Conclusión y Siguientes Pasos](#conclusion-y-siguientes-pasos)
+    - 10.1 Impacto esperado
+    - 10.2 Propuesta de seguimiento y evolución continua
+    - 10.3 Formalización de acuerdos e inicio de ejecución
 
 
 ## 1. Introducción
